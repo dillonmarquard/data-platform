@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefect-worker
+  namespace: prefect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prefect-worker
+  template:
+    metadata:
+      labels:
+        app: prefect-worker
+    spec:
+      containers:
+      - name: prefect-worker
+        image: marquard/prefect-worker:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
