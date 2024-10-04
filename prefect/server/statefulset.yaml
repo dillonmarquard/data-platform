@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: prefect
+  name: dev
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -64,8 +64,10 @@ metadata:
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  ingressClassName: traefik
   rules:
-  - http:
+  - host: k3.prefect.internal
+    http:
       paths:
       - path: /
         pathType: Prefix
